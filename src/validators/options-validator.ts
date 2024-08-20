@@ -14,7 +14,7 @@ export const COLORS = [{
     tw: 'blue-950',
 },
 { label: 'Rose', value: 'rose', tw: 'rose-950' },
-{ label: 'Yellow', value: 'yellow', tw: 'yellow-950' }] as const;
+{ label: 'Brown', value: 'brown', tw: 'brown-400' }] as const;
 
 export const MODELS = {
     name: 'models',

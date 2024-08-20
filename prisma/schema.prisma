@@ -7,6 +7,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// enum is a list of valid entries/options
+enum OderStatus{
+  fullfilled
+  shiped
+  waitting_shipmnet
+}
+
+enum PhoneModel {
+  iphonex
+  iphone11
+  iphone12
+  iphone13
+  iphone14
+  iphone15
+}
+
+enum CaseMaterial {
+  silicone
+  polycarbonate
+}
+
+enum CaseFinish {
+  smooth
+  textured
+}
+
+enum CaseColor {
+  black
+  blue
+  rose
+  brown
+}
+
 model Configuration {
   id              String        @id @default(cuid())
   width           Int
@@ -17,5 +50,4 @@ model Configuration {
   material        CaseMaterial?
   finish          CaseFinish?
   croppedImageUrl String?
-  Order           Order[]
 }

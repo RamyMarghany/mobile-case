@@ -26,6 +26,12 @@ import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
 import { useToast } from "./ui/use-toast";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import {
+  SaveConfigArgs,
+  saveConfigurationToDB,
+} from "@/app/configure/design/actions";
 interface DesignConfiguratorProps {
   configId: string;
   imageUrl: string;
@@ -40,6 +46,25 @@ const DesignConfigurator = ({
   imageDimensions,
 }: DesignConfiguratorProps) => {
   const { toast } = useToast();
+  const route = useRouter();
+
+  const { mutate: saveAllConfigs } = useMutation({
+    // use mutationKey for caching
+    mutationKey: ["save-config"],
+    mutationFn: async (args: SaveConfigArgs) => {
+      await Promise.all([saveConfiguration(), saveConfigurationToDB(args)]);
+    },
+    onError: (error) => {
+      toast({
+        title: "Something went wrong",
+        description: "There was an error on our end. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      route.push(`/configure/design/preview?id=${configId}`);
+    },
+  });
   const [options, setOptions] = useState<{
     color: (typeof COLORS)[number];
     models: (typeof MODELS.options)[number];
@@ -373,7 +398,15 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
-                onClick={() => saveConfiguration()}
+                onClick={() =>
+                  saveAllConfigs({
+                    color: options.color.value,
+                    finish: options.finish.value,
+                    material: options.material.value,
+                    model: options.models.value,
+                    configId,
+                  })
+                }
                 size="sm"
                 className="w-full"
               >
