@@ -7,10 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Configuration{
-  id String @id @default(cuid())
-  width Int
-  height Int
-  imageUrl String
+model Configuration {
+  id              String        @id @default(cuid())
+  width           Int
+  height          Int
+  imageUrl        String
+  color           CaseColor?
+  model           PhoneModel?
+  material        CaseMaterial?
+  finish          CaseFinish?
   croppedImageUrl String?
+  Order           Order[]
 }
