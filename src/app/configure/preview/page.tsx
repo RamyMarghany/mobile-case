@@ -1,6 +1,6 @@
-import DesignConfigurator from "@/app/configure/design/DesignConfigurator";
 import { db } from "@/db";
 import { notFound } from "next/navigation";
+import DesignPreview from "./DesignPreview";
 
 interface PageProps {
   searchParams: {
@@ -9,8 +9,8 @@ interface PageProps {
 }
 
 const Page = async ({ searchParams }: PageProps) => {
-  // using async to make db call on server
   const { id } = searchParams;
+
   if (!id || typeof id !== "string") {
     return notFound();
   }
@@ -18,18 +18,12 @@ const Page = async ({ searchParams }: PageProps) => {
   const configuration = await db.configuration.findUnique({
     where: { id },
   });
+
   if (!configuration) {
     return notFound();
   }
-  const { imageUrl, width, height } = configuration;
 
-  return (
-    <DesignConfigurator
-      configId={configuration.id}
-      imageUrl={imageUrl}
-      imageDimensions={{ width, height }}
-    />
-  );
+  return <DesignPreview configuration={configuration} />;
 };
 
 export default Page;

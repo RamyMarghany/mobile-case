@@ -1,10 +1,10 @@
 "use client";
 import { cn, formatPrice } from "@/lib/utils";
-import { AspectRatio } from "./ui/aspect-ratio";
+import { AspectRatio } from "../../../components/ui/aspect-ratio";
 import NextImage from "next/image";
 import { Rnd } from "react-rnd";
-import HandleUploadedImageBordersComponents from "./HandleUploadedImageBordersComponents";
-import { ScrollArea } from "./ui/scroll-area";
+import HandleUploadedImageBordersComponents from "../../../components/HandleUploadedImageBordersComponents";
+import { ScrollArea } from "../../../components/ui/scroll-area";
 import { RadioGroup } from "@headlessui/react";
 import { useState, useRef } from "react";
 import {
@@ -13,19 +13,19 @@ import {
   MATERIALS,
   MODELS,
 } from "@/validators/options-validator";
-import { Label } from "./ui/label";
+import { Label } from "../../../components/ui/label";
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "../../../components/ui/dropdown-menu";
 
-import { Button } from "./ui/button";
+import { Button } from "../../../components/ui/button";
 import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
 import { useUploadThing } from "@/lib/uploadthing";
-import { useToast } from "./ui/use-toast";
+import { useToast } from "../../../components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -48,7 +48,7 @@ const DesignConfigurator = ({
   const { toast } = useToast();
   const route = useRouter();
 
-  const { mutate: saveAllConfigs } = useMutation({
+  const { mutate: saveAllConfigs, isPending } = useMutation({
     // use mutationKey for caching
     mutationKey: ["save-config"],
     mutationFn: async (args: SaveConfigArgs) => {
@@ -62,7 +62,7 @@ const DesignConfigurator = ({
       });
     },
     onSuccess: () => {
-      route.push(`/configure/design/preview?id=${configId}`);
+      route.push(`/configure/preview?id=${configId}`);
     },
   });
   const [options, setOptions] = useState<{
@@ -398,6 +398,9 @@ const DesignConfigurator = ({
                 )}
               </p>
               <Button
+                isLoading={isPending}
+                disabled={isPending}
+                loadingText="Saving"
                 onClick={() =>
                   saveAllConfigs({
                     color: options.color.value,
