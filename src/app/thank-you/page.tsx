@@ -2,7 +2,11 @@ import { Suspense } from "react";
 import ThankYou from "./ThankYou";
 
 const Page = () => {
-  return <ThankYou />;
+  return (
+    <Suspense>
+      <ThankYou />
+    </Suspense>
+  );
 };
 
 export default Page;
