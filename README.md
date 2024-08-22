@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a simple E-commerce [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -10,24 +10,27 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
+
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Used Technologies and Libraries
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [Next.js](https://nextjs.org/docs) - to develop interactive web applications.
+- [Shadcn UI](https://ui.shadcn.com/) - to build a modern and beautiful user interface.
+- [Tailwind CSS](https://tailwindcss.com/) - to style the application.
+- [React Query](https://tanstack.com/query/v4/) - to fetch data from the API.
+- [Prisma](https://www.prisma.io/) - to interact with the database.
+- [Stripe](https://stripe.com/docs/payments) - to handle payments and checkout sessions.
+- [Kinde](https://kinde.com/) - to handle authentication and user management.
+- [Zod](https://zod.dev/) - to validate data.
+- [Uploadthing](https://uploadthing.com/) - to upload images.
+- [Farmer Motion](https://www.framer.com/motion/) - to add animations to the application.
+- [Lucid](https://lucide.dev/) - to add icons to the application.
+- [Sharp](https://sharp.pixelplumbing.com/) - to resize and optimize images.
+- [React RND](https://react-rnd.org/) - to create draggable and resizable components.
+- [React Dropzone](https://react-dropzone.js.org/) - to create drag and drop zones.
 
 ## Deploy on Vercel
 
