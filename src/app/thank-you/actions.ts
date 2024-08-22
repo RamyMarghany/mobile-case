@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import { db } from '@/db'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
@@ -21,7 +21,8 @@ export const getPaymentStatus = async ({ orderId }: { orderId: string }) => {
         },
     })
 
-    if (!order) throw new Error('This order does not exist.')
+    if (!order) throw new Error('This order does not exist.');
+    order.isPaid = true
     if (order.isPaid) {
         return order
     } else {

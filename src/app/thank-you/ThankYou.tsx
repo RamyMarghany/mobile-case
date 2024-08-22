@@ -10,7 +10,6 @@ import { formatPrice } from "@/lib/utils";
 const ThankYou = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId") || "";
-
   const { data } = useQuery({
     queryKey: ["get-payment-status"],
     queryFn: async () => await getPaymentStatus({ orderId }),
@@ -85,33 +84,6 @@ const ThankYou = () => {
         </div>
 
         <div>
-          <div className="grid grid-cols-2 gap-x-6 py-10 text-sm">
-            <div>
-              <p className="font-medium text-gray-900">Shipping address</p>
-              <div className="mt-2 text-zinc-700">
-                <address className="not-italic">
-                  <span className="block">{shippingAddress?.name}</span>
-                  <span className="block">{shippingAddress?.street}</span>
-                  <span className="block">
-                    {shippingAddress?.postalCode} {shippingAddress?.city}
-                  </span>
-                </address>
-              </div>
-            </div>
-            <div>
-              <p className="font-medium text-gray-900">Billing address</p>
-              <div className="mt-2 text-zinc-700">
-                <address className="not-italic">
-                  <span className="block">{billingAddress?.name}</span>
-                  <span className="block">{billingAddress?.street}</span>
-                  <span className="block">
-                    {billingAddress?.postalCode} {billingAddress?.city}
-                  </span>
-                </address>
-              </div>
-            </div>
-          </div>
-
           <div className="grid grid-cols-2 gap-x-6 border-t border-zinc-200 py-10 text-sm">
             <div>
               <p className="font-medium text-zinc-900">Payment status</p>
