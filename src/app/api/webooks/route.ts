@@ -22,8 +22,9 @@ export async function POST(req: Request) {
         if (event.type === "checkout.session.completed") {
             if (!event.data.object.customer_details?.email) {
                 // bad request
-                return new Response("Missing user email", { status: 400 })
+                throw new Error('Missing user email')
             }
+            // all important user metadata
             const session = event.data.object as Stripe.Checkout.Session
             const { userId, orderId } = session.metadata || {
                 userId: null,
@@ -72,7 +73,6 @@ export async function POST(req: Request) {
         return NextResponse.json({ result: event, ok: true })
     } catch (error) {
         console.log(error)
-        return NextResponse.json({ message: "something went wrong!", result: error, ok: false }, { status: 500 })
-
+        return NextResponse.json({ message: "something went wrong!", ok: false }, { status: 500 })
     }
 }

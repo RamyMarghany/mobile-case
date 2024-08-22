@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// enum is a list of valid entries/options
 enum OrderStatus {
   fulfilled
   shipped
